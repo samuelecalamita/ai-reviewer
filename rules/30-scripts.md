@@ -68,3 +68,26 @@ Use guard clauses at the beginning of the function to exit early for invalid or 
 ### Examples
 `bad`: `if (isValid) { doWork(); } else { return; }`
 `good`: `if (!isValid) return; doWork();`
+
+## T004
+### Title
+Prefer class selectors over ID selectors in scripts
+
+### Why
+Class selectors are more reusable and reduce tight coupling to single-instance markup.
+
+### Detect
+DOM selection in scripts using ID selectors (for example `#id`) where a class selector can be used safely.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when an ID selector is required by platform constraints, accessibility linkage, or unique document-level targets.
+
+### Suggested Fix
+Prefer class-based selectors (for example `.component-name`) and keep selector naming aligned with BEM classes used in markup/styles.
+
+### Examples
+`bad`: `document.querySelector('#component-name')`
+`good`: `document.querySelector('.component-name')`
