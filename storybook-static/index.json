@@ -1,0 +1,15 @@
+{
+  "v": 5,
+  "entries": {
+    "components-componentname--default": {
+      "type": "story",
+      "subtype": "story",
+      "id": "components-componentname--default",
+      "name": "Default",
+      "title": "Components/ComponentName",
+      "importPath": "./src/components/component-name/component-name.stories.ts",
+      "tags": ["dev", "test", "manifest", "autodocs"],
+      "exportName": "Default"
+    }
+  }
+}

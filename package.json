@@ -1,0 +1,44 @@
+{
+  "name": "ai-reviewer",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" \".storybook/**/*.{ts,tsx}\" vite.config.ts eslint.config.js --no-error-on-unmatched-pattern && stylelint \"src/**/*.scss\"",
+    "format": "prettier --write .",
+    "lint:fix": "eslint --fix \"src/**/*.{ts,tsx}\" \".storybook/**/*.{ts,tsx}\" vite.config.ts eslint.config.js --no-error-on-unmatched-pattern && stylelint \"src/**/*.scss\" --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelecalamita/ai-reviewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/samuelecalamita/ai-reviewer/issues"
+  },
+  "homepage": "https://github.com/samuelecalamita/ai-reviewer#readme",
+  "dependencies": {
+    "lit": "^3.3.2"
+  },
+  "devDependencies": {
+    "@pro-vision/eslint-config-pv": "^5.0.0",
+    "@pro-vision/stylelint-config-pv": "^4.0.0",
+    "@storybook/web-components-vite": "^10.2.10",
+    "eslint": "^9.34.0",
+    "prettier": "^3.8.1",
+    "sass": "^1.97.3",
+    "storybook": "^10.2.10",
+    "stylelint": "^16.26.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
