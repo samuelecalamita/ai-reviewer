@@ -24,28 +24,18 @@ export class ComponentName extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-
-    if (!this.button) {
-      return;
-    }
-
+    if (!this.button) return;
     this.button.addEventListener("click", this.clickListener);
   }
 
   disconnectedCallback() {
-    if (this.button) {
-      this.button.removeEventListener("click", this.clickListener);
-    }
-
+    if (!this.button) return;
+    this.button.removeEventListener("click", this.clickListener);
     super.disconnectedCallback();
   }
 
   @eventOptions({ passive: true })
   private handleClick(_event: Event): void {
-    if (!this.status) {
-      return;
-    }
-
     this.status.textContent = "Interaction handled by web component behavior.";
   }
 
