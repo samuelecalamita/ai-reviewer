@@ -97,3 +97,27 @@ Use class-only selectors for component styling. Avoid structural dependence on p
 `warn`: `.my-m-class-name a { ... }`
 `good`: `.my-m-class-name .my-e-anchor { ... }`
 `good`: `.my-m-class-name::before { ... }`
+
+## S005
+### Title
+Avoid `!important` (require explicit justification when used)
+
+### Why
+`!important` breaks predictable cascade behavior and makes styles harder to maintain and override.
+
+### Detect
+Any use of `!important` in SCSS/CSS declarations.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when `!important` is required for a documented integration edge case and an adjacent comment explains why it is necessary.
+
+### Suggested Fix
+Remove `!important` and resolve specificity/cascade through proper selector design. If unavoidable, keep `!important` and add a short comment with the technical reason.
+
+### Examples
+`bad`: `.my-e-title { color: red !important; }`
+`good`: `.my-e-title { color: red; }`
+`good`: `.my-e-title { color: red !important; /* required to override third-party inline style in author mode */ }`
