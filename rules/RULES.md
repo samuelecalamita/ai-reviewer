@@ -5,11 +5,9 @@
 Define a model-agnostic and maintainable standards system for frontend code review.
 
 ## Scope
-
-- Stack target: TypeScript + Vite + Lit HTML + Kluntje (+ Handlebars where present).
-- Styles: SCSS.
 - Rule application scope: changed files in the current diff/PR.
 - Source of truth for base quality: existing linter rules for script, styles, and markup.
+- Dependency source of truth: infer active stack and tooling from `package.json` (`dependencies` and `devDependencies`) before applying rules.
 - Browser compatibility baseline: latest 2 versions of Firefox, Chromium, and Safari.
 
 ## Rule Files (load in this order)
