@@ -17,6 +17,10 @@ Run a standards-based frontend review workflow.
 ## Review Mode
 Use when reviewing existing changes (for example pre-commit or PR checks).
 
+#### Quick Triggers
+- `AGENTS review: full codebase` => review all source files in the repository.
+- `AGENTS review: git diff` => review only staged + unstaged git diff files.
+
 #### Inputs
 - Diff or changed files.
 - Repo context needed to interpret changes.
