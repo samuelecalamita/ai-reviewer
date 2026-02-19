@@ -1,8 +1,7 @@
 # AI Agent Instructions (MVP)
 
 ## Purpose
-
-Run a standards-based frontend review workflow.
+Provide a standards-driven workflow that is extensible to multiple engineering tasks.
 
 ## Standards Source
 
@@ -17,9 +16,14 @@ Run a standards-based frontend review workflow.
 4. Keep output concise and actionable.
 5. If confidence is low, mark uncertainty explicitly.
 
-## Review Mode
+## Task Modes
 
+### review (active)
 Use when reviewing existing changes (for example pre-commit or PR checks).
+
+#### Quick Triggers
+- `AGENTS review: full codebase` => review all source files in the repository.
+- `AGENTS review: git diff` => review only staged + unstaged git diff files.
 
 #### Inputs
 
@@ -41,6 +45,12 @@ Use this exact format per finding:
 If no issues are found:
 
 `No issues found against rules/RULES.md in changed files.`
+
+### generate (future)
+Reserved for future implementation.
+
+### refactor (future)
+Reserved for future implementation.
 
 ## Guardrails
 
