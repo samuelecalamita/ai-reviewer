@@ -23,5 +23,5 @@ If no issues are found:
 `No issues found against rules/RULES.md in changed files.`
 
 ## Notes
-- Works with ChatGPT and other LLMs.
+- Designed to work with Codex, Cursor, Claude, Copilot, and other LLM-based coding assistants.
 - Keep rules in `rules/` as the single source of truth.
