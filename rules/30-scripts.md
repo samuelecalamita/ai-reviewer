@@ -115,3 +115,27 @@ Prefer class-based selectors (for example `.component-name`) and keep selector n
 ### Examples
 `bad`: `document.querySelector('#component-name')`
 `good`: `document.querySelector('.component-name')`
+
+## T005
+### Title
+Prefer class selectors in `querySelector` over ID or attribute selectors
+
+### Why
+Class selectors are more reusable, less brittle, and align better with component-level styling conventions.
+
+### Detect
+Use of `querySelector` / `querySelectorAll` with ID selectors (`#id`) or attribute selectors (`[data-*]`, `[id=...]`) when a class selector can be used safely.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when ID/attribute selectors are required by accessibility linkage, third-party contracts, testing hooks, or documented platform constraints.
+
+### Suggested Fix
+Use class selectors (for example `.component-name__button`) for DOM queries and align them with BEM class names in markup.
+
+### Examples
+`bad`: `document.querySelector('#component-name')`
+`bad`: `document.querySelector('[data-component-name-action]')`
+`good`: `document.querySelector('.component-name__button')`
