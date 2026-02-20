@@ -18,7 +18,7 @@ Use these short prompts with any LLM:
 
 `| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
 `| --- | --- | --- | --- | --- | --- |`
-`| G001 | error | path/to/file.ext:line | ... | ... | One short takeaway for a jr/mid developer. |`
+`| G001 | error | component-name.scss (line 14, col 1) | ... | ... | One short takeaway for a jr/mid developer. |`
 
 If no issues are found:
 
