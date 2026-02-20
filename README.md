@@ -20,10 +20,7 @@ Use these short prompts with any LLM:
 
 `| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
 `| --- | --- | --- | --- | --- | --- |`
-`| G001 | error | ./src/components/component-name/component-name.scss:14:1 | ... | ... | One short takeaway for a jr/mid developer. |`
-``
-`Quick open`
-`- ./src/components/component-name/component-name.scss:14:1`
+`| G001 | error | \`./<relative-path>/<file>.ext:14:1\` | ... | ... | One short takeaway for a jr/mid developer. |`
 
 If no issues are found:
 
