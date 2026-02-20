@@ -37,10 +37,16 @@ Use when reviewing existing changes (for example pre-commit or PR checks).
 3. When dependency files change (for example `package.json` or lockfiles), apply rules in `rules/40-dependencies.md`.
 
 #### Output Contract
+Use this exact markdown table format for findings:
 
-Use this exact format per finding:
+`| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
+`| --- | --- | --- | --- | --- | --- |`
+`| G001 | error | path/to/file.ext:line | ... | ... | One short takeaway. |`
 
-`[RULE_ID] [severity] path/to/file.ext:line - Problem. Suggested fix: ...`
+Rules:
+- One row per finding.
+- `Lesson learned` must be short (max 1 sentence), practical, and tied to the violated rule.
+- Keep findings concise and high-signal.
 
 If no issues are found:
 
