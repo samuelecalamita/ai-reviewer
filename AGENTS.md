@@ -31,11 +31,21 @@ Use when reviewing existing changes (for example pre-commit or PR checks).
 1. Review changed files by default.
 2. Prioritize high-confidence findings.
 3. When dependency files change (for example `package.json` or lockfiles), apply rules in `rules/40-dependencies.md`.
+4. For `AGENTS review: git diff`, always run repository linting (using project lint scripts/config) before final findings.
+5. For `AGENTS review: git diff`, report findings on changed files by default; include out-of-diff findings only when they are global/blocking issues that fail lint/build quality gates.
 
 #### Output Contract
-Use this exact format per finding:
+Use this exact markdown table format for findings:
 
-`[RULE_ID] [severity] path/to/file.ext:line - Problem. Suggested fix: ...`
+`| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
+`| --- | --- | --- | --- | --- | --- |`
+`| G001 | error | \`./<relative-path>/<file>.ext:14:1\` | ... | ... | One short takeaway. |`
+
+Rules:
+- One row per finding.
+- `Location` must use ``./path/to/file.ext:line:col`` and be wrapped in backticks in the table cell.
+- `Lesson learned` must be short (max 1 sentence), practical, and tied to the violated rule.
+- Keep findings concise and high-signal.
 
 If no issues are found:
 

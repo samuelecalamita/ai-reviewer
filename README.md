@@ -14,9 +14,13 @@ Use these short prompts with any LLM:
 ## What the LLM must do
 - Use only `AGENTS.md`, `rules/RULES.md`, and referenced `rules/*` files.
 - Do not invent extra rules.
+- For `AGENTS review: git diff`, run repository linting before reporting findings.
+- For `AGENTS review: git diff`, keep findings focused on changed files unless a global/blocking issue fails lint/build gates.
 - Use this output format:
 
-`[RULE_ID] [severity] path/to/file.ext:line - Problem. Suggested fix: ...`
+`| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
+`| --- | --- | --- | --- | --- | --- |`
+`| G001 | error | \`./<relative-path>/<file>.ext:14:1\` | ... | ... | One short takeaway for a jr/mid developer. |`
 
 If no issues are found:
 
