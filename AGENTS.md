@@ -37,11 +37,15 @@ Use this exact markdown table format for findings:
 
 `| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
 `| --- | --- | --- | --- | --- | --- |`
-`| G001 | error | component-name.scss (line 14, col 1) | ... | ... | One short takeaway. |`
+`| G001 | error | ./src/components/component-name/component-name.scss:14:1 | ... | ... | One short takeaway. |`
+``
+`Quick open`
+`- ./src/components/component-name/component-name.scss:14:1`
 
 Rules:
 - One row per finding.
-- `Location` must use `path/to/file.ext (line X, col Y)`.
+- `Location` must use `./path/to/file.ext:line:col`.
+- After the table, add a `Quick open` section with one standalone `./path/to/file.ext:line:col` entry per finding (same order as table rows).
 - `Lesson learned` must be short (max 1 sentence), practical, and tied to the violated rule.
 - Keep findings concise and high-signal.
 
