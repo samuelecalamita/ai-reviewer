@@ -16,7 +16,9 @@ Use these short prompts with any LLM:
 - Do not invent extra rules.
 - Use this output format:
 
-`[RULE_ID] [severity] path/to/file.ext:line - Problem. Suggested fix: ...`
+`| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
+`| --- | --- | --- | --- | --- | --- |`
+`| G001 | error | path/to/file.ext:line | ... | ... | One short takeaway for a jr/mid developer. |`
 
 If no issues are found:
 
