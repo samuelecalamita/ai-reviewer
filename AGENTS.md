@@ -31,6 +31,8 @@ Use when reviewing existing changes (for example pre-commit or PR checks).
 1. Review changed files by default.
 2. Prioritize high-confidence findings.
 3. When dependency files change (for example `package.json` or lockfiles), apply rules in `rules/40-dependencies.md`.
+4. For `AGENTS review: git diff`, always run repository linting (using project lint scripts/config) before final findings.
+5. For `AGENTS review: git diff`, report findings on changed files by default; include out-of-diff findings only when they are global/blocking issues that fail lint/build quality gates.
 
 #### Output Contract
 Use this exact markdown table format for findings:
