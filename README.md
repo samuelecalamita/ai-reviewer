@@ -29,3 +29,4 @@ If no issues are found:
 ## Notes
 - Designed to work with Codex, Cursor, Claude, Copilot, and other LLM-based coding assistants.
 - Keep rules in `rules/` as the single source of truth.
+- Maintainer quick reference: `rules/STANDARDS_OVERVIEW.md`.
