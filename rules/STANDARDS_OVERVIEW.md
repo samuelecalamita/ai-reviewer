@@ -11,6 +11,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | M003 | error | Markup | Focus must remain visible |
 | M004 | warning | Markup | Avoid hover-only interaction paths |
 | M005 | warning | Markup | Use semantic markup |
+| M006 | error | Markup | Interactive elements with image-only content must have an accessible label |
 | S001 | warning | Styles | SCSS classes must follow BEM |
 | S002 | warning | Styles | Avoid deep nesting in SCSS |
 | S003 | warning | Styles | Use block-root nesting for BEM in SCSS |
@@ -20,6 +21,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | T002 | warning | Scripts | Frontend files must use kebab-case names |
 | T003 | warning | Scripts | Prefer early return in functions |
 | T004 | warning | Scripts | Prefer class selectors in `querySelector` over ID or attribute selectors |
+| T005 | warning | Scripts | Avoid `any` in new or changed TypeScript code |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |

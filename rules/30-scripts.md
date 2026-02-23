@@ -92,3 +92,36 @@ Use class selectors (for example `.component-name__button`) for DOM queries and 
 `bad`: `document.querySelector('#component-name')`
 `bad`: `document.querySelector('[data-component-name-action]')`
 `good`: `document.querySelector('.component-name__button')`
+
+## T005
+
+### Title
+
+Avoid `any` in new or changed TypeScript code
+
+### Why
+
+`any` disables type safety and increases the chance of runtime bugs.
+
+### Detect
+
+New or modified code that introduces explicit `any` types or `as any` casts.
+
+### Severity
+
+`warning`
+
+### False Positive Guard
+
+Do not report when a temporary `any` is required by an external typing gap and includes a short inline justification comment.
+
+### Suggested Fix
+
+Use specific interfaces/types, or `unknown` with explicit narrowing at usage boundaries.
+
+### Examples
+
+`bad`: `const payload: any = response.data`
+`bad`: `return value as any`
+`good`: `const payload: ApiPayload = response.data`
+`good`: `const payload: unknown = response.data`
