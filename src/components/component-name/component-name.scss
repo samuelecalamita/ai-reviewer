@@ -11,7 +11,7 @@ $component-name-status-color: #2d2d2d;
   border: 1px solid $component-name-border-color;
   border-radius: 0.5rem;
 
-  &__title {
+  &-title {
     margin: 0 0 0.5rem;
     font-size: 1.25rem;
   }
@@ -19,6 +19,18 @@ $component-name-status-color: #2d2d2d;
   &__text {
     margin: 0 0 0.75rem;
     color: $component-name-text-color;
+
+    a {
+      color: red;
+
+      span {
+        text-decoration: underline;
+
+        &::after {
+          content: ";";
+        }
+      }
+    }
   }
 
   &__button {
