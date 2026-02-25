@@ -22,6 +22,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | T004 | warning | Scripts | Prefer class selectors in `querySelector` over ID or attribute selectors |
 | T005 | warning | Scripts | Avoid `any` in new or changed TypeScript code |
 | T006 | warning | Scripts | Require explicit reason when overriding native event flow |
+| T007 | warning | Scripts | Do not use optional chaining after a non-null guard |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |

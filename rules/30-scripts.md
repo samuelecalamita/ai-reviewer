@@ -187,3 +187,46 @@ Keep native behavior unless override is required. If override is required, add a
 `bad`: `event.preventDefault(); // prevent default`
 `good`: `event.preventDefault(); // block native form submit to keep SPA state and run async validation first`
 `good`: `event.stopPropagation(); // avoid duplicate parent click analytics event`
+
+## T007
+
+### Title
+
+Do not use optional chaining after a non-null guard
+
+### Why
+
+Use 2 coherent styles, not 3 mixed styles:
+- required value: no early return, fail fast if missing (`!` / `throw`)
+- optional value: use early return or `?.`
+
+The incoherent pattern is `if (!value) return` and then `value?.` in the same flow.
+After that guard, you already chose "if missing, exit", so the remaining code should treat the value as present.
+
+### Detect
+
+In the same local flow:
+- a value is checked with a guard such as `if (!value) return`
+- then the same value is used with optional chaining (`value?.method()`, `value?.prop`)
+
+### Severity
+
+`warning`
+
+### False Positive Guard
+
+Do not report when optional behavior is intentional (for example optional callbacks), or when there is no explicit local non-null guard.
+
+### Suggested Fix
+
+Choose one intent and keep it consistent:
+- required value: no early return; fail fast if missing (`!` / `throw`)
+- optional value: use early return or `?.`, but not both on the same value in the same flow
+
+### Examples
+
+`bad`: `if (!button) return; button?.addEventListener("click", onClick);`
+`bad`: `if (!panel) return; panel?.classList.add("is-open");`
+`good`: `button!.addEventListener("click", onClick);`
+`good`: `if (!panel) return; panel.classList.add("is-open");`
+`good`: `onClick?.(event); // callback is intentionally optional`
