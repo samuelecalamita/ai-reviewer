@@ -149,3 +149,41 @@ Use specific interfaces/types, or `unknown` with explicit narrowing at usage bou
 `bad`: `return value as any`
 `good`: `const payload: ApiPayload = response.data`
 `good`: `const payload: unknown = response.data`
+
+## T006
+
+### Title
+
+Require explicit reason when overriding native event flow
+
+### Why
+
+Overriding native event behavior (`preventDefault` / propagation control) is often unnecessary and can introduce hidden side effects.
+
+### Detect
+
+Calls to `event.preventDefault()`, `event.stopPropagation()`, or `event.stopImmediatePropagation()` without an adjacent comment that explains both:
+- why the override is required in this handler
+- what behavior/side effect is being prevented or controlled
+
+Generic comments (for example `needed`, `fix`, `prevent default`) are treated as missing justification.
+
+### Severity
+
+`warning`
+
+### False Positive Guard
+
+Do not report when an adjacent inline or previous-line comment is specific to the handler and describes the technical reason and impact of overriding native behavior.
+
+### Suggested Fix
+
+Keep native behavior unless override is required. If override is required, add a short, specific comment that states the reason and expected impact.
+
+### Examples
+
+`bad`: `event.preventDefault();`
+`bad`: `event.preventDefault(); // needed`
+`bad`: `event.preventDefault(); // prevent default`
+`good`: `event.preventDefault(); // block native form submit to keep SPA state and run async validation first`
+`good`: `event.stopPropagation(); // avoid duplicate parent click analytics event`
