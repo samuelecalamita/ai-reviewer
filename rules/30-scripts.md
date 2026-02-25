@@ -230,3 +230,40 @@ Choose one intent and keep it consistent:
 `good`: `button!.addEventListener("click", onClick);`
 `good`: `if (!panel) return; panel.classList.add("is-open");`
 `good`: `onClick?.(event); // callback is intentionally optional`
+
+## T008
+
+### Title
+
+Query selector result type must match the selected element
+
+### Why
+
+When a selector is typed/cast as the wrong element type, code can compile but fail at runtime or hide invalid assumptions.
+
+### Detect
+
+For `querySelector` / `querySelectorAll`, report when the declared or casted DOM type conflicts with the element implied by the selector/markup context.
+
+Examples of mismatches:
+- typed/casted as `HTMLButtonElement` but selector/markup points to an `<a>`
+- typed/casted as `HTMLAnchorElement` but selector/markup points to a `<button>`
+
+### Severity
+
+`warning`
+
+### False Positive Guard
+
+Do not report when selector targets are dynamic or not statically analyzable, when the element type is narrowed at runtime (`instanceof`, `matches`, `tagName` checks), or when markup source is outside repository control.
+
+### Suggested Fix
+
+Align selector, markup, and TypeScript type so they describe the same element. If element type is uncertain, use `HTMLElement` and narrow before type-specific APIs.
+
+### Examples
+
+`bad`: `const cta = root.querySelector(".cta") as HTMLButtonElement; // .cta is an <a>`
+`bad`: `const links: NodeListOf<HTMLAnchorElement> = root.querySelectorAll(".action-button"); // .action-button are <button>`
+`good`: `const cta = root.querySelector(".cta") as HTMLAnchorElement;`
+`good`: `const actions: NodeListOf<HTMLButtonElement> = root.querySelectorAll(".action-button");`

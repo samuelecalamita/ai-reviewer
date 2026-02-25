@@ -23,6 +23,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | T005 | warning | Scripts | Avoid `any` in new or changed TypeScript code |
 | T006 | warning | Scripts | Require explicit reason when overriding native event flow |
 | T007 | warning | Scripts | Do not use optional chaining after a non-null guard |
+| T008 | warning | Scripts | Query selector result type must match the selected element |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |
