@@ -45,3 +45,29 @@ Use a broadly supported standard alternative, or add a compatible fallback/polyf
 ### Examples
 `bad`: introducing a browser-limited feature without fallback.
 `good`: using a modern feature with full support or with a documented fallback/polyfill.
+
+## G003
+### Title
+Keep code comments relevant and actionable
+
+### Why
+Stale or vague comments add noise, mislead reviewers, and hide real follow-up work.
+
+### Detect
+New or changed comments that are obsolete, too vague to act on, or inconsistent with current code behavior/context (including TODO/FIXME notes).
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report comments that are still valid and clearly actionable (for example with concrete next step, owner, issue/task reference, or concise rationale for non-obvious code).
+
+### Suggested Fix
+Remove irrelevant comments. If a note is still needed, keep it short, specific, and tied to a real pending action or clear rationale.
+
+### Examples
+`bad`: `// this is important`
+`bad`: `// TODO: maybe improve this later`
+`bad`: `// FIXME temporary workaround` (already resolved but comment left behind)
+`good`: `// Needed because API returns mixed date formats from legacy endpoint`
+`good`: `// TODO(#1234): replace polling with websocket after backend endpoint is available`
