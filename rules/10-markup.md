@@ -154,3 +154,38 @@ Replace generic containers with semantic tags when they represent semantic roles
 
 `bad`: `<div class="nav">...</div>`
 `good`: `<nav class="nav">...</nav>`
+
+## M006
+
+### Title
+
+Interactive elements with image-only content must have an accessible label
+
+### Why
+
+Icon-only or image-only interactive elements without an accessible name are not understandable for screen reader users.
+
+### Detect
+
+Interactive elements (for example `<a>`, `<button>`, or custom elements with interactive role) whose visible content is only an image/icon and that do not expose an accessible name (for example via visible text, screen-reader-only text, `aria-label`, `aria-labelledby`, or meaningful image `alt` text).
+
+### Severity
+
+`error`
+
+### False Positive Guard
+
+Do not report when the interactive element already has a valid accessible name through visible text, screen-reader-only text (for example `sr-only`/`visually-hidden`), `aria-label`, `aria-labelledby`, or non-empty meaningful `alt` on an informative image.
+
+### Suggested Fix
+
+Provide a clear accessible name on the interactive element with visible text, screen-reader-only text, or `aria-label`/`aria-labelledby`; if relying on the image, ensure the image has meaningful non-empty `alt` text.
+
+### Examples
+
+`bad`: `<a href="/home"><img src="/icons/home.svg" alt="" /></a>`
+`good`: `<a href="/home" aria-label="Home"><img src="/icons/home.svg" alt="" /></a>`
+`good`: `<a href="/home"><img src="/icons/home.svg" alt="Home" /></a>`
+`good`: `<a href="/home"><img src="/icons/home.svg" alt="" /><span class="sr-only">Home</span></a>`
+`bad`: `<button type="button"><img src="/icons/search.svg" alt="" /></button>`
+`good`: `<button type="button" aria-label="Search"><img src="/icons/search.svg" alt="" /></button>`

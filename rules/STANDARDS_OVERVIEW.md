@@ -11,6 +11,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | M003 | error | Markup | Focus must remain visible |
 | M004 | warning | Markup | Avoid hover-only interaction paths |
 | M005 | warning | Markup | Use semantic markup |
+| M006 | error | Markup | Interactive elements with image-only content must have an accessible label |
 | S001 | warning | Styles | SCSS classes must follow BEM |
 | S002 | warning | Styles | Avoid deep nesting in SCSS |
 | S003 | warning | Styles | Use block-root nesting for BEM in SCSS |

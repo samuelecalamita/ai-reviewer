@@ -20,7 +20,7 @@ Use these short prompts with any LLM:
 
 `| Rule | Severity | Location | Problem | Suggested fix | Lesson learned |`
 `| --- | --- | --- | --- | --- | --- |`
-`| G001 | error | \`./<relative-path>/<file>.ext:14:1\` | ... | ... | One short takeaway for a jr/mid developer. |`
+`| G001 | error | \`./<relative-path>/<file>.ext:14:1\` | ... | ... | One short takeaway |`
 
 If no issues are found:
 
