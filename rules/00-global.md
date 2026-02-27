@@ -71,3 +71,31 @@ Remove irrelevant comments. If a note is still needed, keep it short, specific, 
 `bad`: `// FIXME temporary workaround` (already resolved but comment left behind)
 `good`: `// Needed because API returns mixed date formats from legacy endpoint`
 `good`: `// TODO(#1234): replace polling with websocket after backend endpoint is available`
+
+## G004
+### Title
+Reuse existing UI components before creating new markup
+
+### Why
+Reusing shared components improves consistency, accessibility, and maintainability across the codebase.
+
+### Detect
+New or changed UI code that reimplements a component pattern already available in the project (for example modal, input, badge) instead of using the shared component.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when:
+- no equivalent shared component exists,
+- the shared component cannot meet required behavior without risk/regression,
+- native HTML usage is intentionally required by semantics or platform constraints,
+- the deviation includes a short justification comment.
+
+### Suggested Fix
+Use the existing shared component. If it does not fit, extend the shared component or document why a local implementation is required.
+
+### Examples
+`bad`: custom dialog markup/CSS/JS reimplemented even though a shared `app-modal` component already exists
+`good`: `<app-modal open heading="Delete item">...</app-modal>`
+`good`: local modal implementation with short justification when `app-modal` cannot support a required behavior without regression

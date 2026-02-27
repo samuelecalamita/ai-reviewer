@@ -7,6 +7,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | G001 | error | Global | Respect existing lint rules |
 | G002 | error | Global | Prefer modern web standards with 2-version browser support |
 | G003 | warning | Global | Keep code comments relevant and actionable |
+| G004 | warning | Global | Reuse existing UI components before creating new markup |
 | M001 | error | Markup | Form controls must have labels |
 | M002 | error | Markup | Interactive elements must be keyboard operable |
 | M003 | error | Markup | Focus must remain visible |
