@@ -1,0 +1,53 @@
+$component-name-border-color: #dcdcdc;
+$component-name-background-color: #fff;
+$component-name-text-color: #444;
+$component-name-button-border-color: #222;
+$component-name-focus-color: #1b5cff;
+$component-name-status-color: #2d2d2d;
+
+.component-name {
+  padding: 1rem;
+  background: $component-name-background-color;
+  border: 1px solid $component-name-border-color;
+  border-radius: 0.5rem;
+
+  &-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  &__text {
+    margin: 0 0 0.75rem;
+    color: $component-name-text-color;
+
+    a {
+      color: red;
+
+      span {
+        text-decoration: underline;
+
+        &::after {
+          content: ";";
+        }
+      }
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    background: $component-name-background-color;
+    border: 1px solid $component-name-button-border-color;
+    border-radius: 0.375rem;
+
+    &:focus-visible {
+      outline: 2px solid $component-name-focus-color;
+      outline-offset: 2px;
+    }
+  }
+
+  &__status {
+    margin: 0.75rem 0 0;
+    color: $component-name-status-color;
+  }
+}
