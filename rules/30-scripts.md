@@ -127,6 +127,124 @@ Use specific interfaces/types, or `unknown` with explicit narrowing at usage bou
 `good`: `const payload: unknown = response.data`
 
 ## T006
+
+### Title
+
+Require explicit reason when overriding native event flow
+
+### Why
+
+Overriding native event behavior (`preventDefault` / propagation control) is often unnecessary and can introduce hidden side effects.
+
+### Detect
+
+Calls to `event.preventDefault()`, `event.stopPropagation()`, or `event.stopImmediatePropagation()` without an adjacent comment that explains both:
+- why the override is required in this handler
+- what behavior/side effect is being prevented or controlled
+
+Generic comments (for example `needed`, `fix`, `prevent default`) are treated as missing justification.
+
+### Severity
+
+`warning`
+
+### False Positive Guard
+
+Do not report when an adjacent inline or previous-line comment is specific to the handler and describes the technical reason and impact of overriding native behavior.
+
+### Suggested Fix
+
+Keep native behavior unless override is required. If override is required, add a short, specific comment that states the reason and expected impact.
+
+### Examples
+
+`bad`: `event.preventDefault();`
+`bad`: `event.preventDefault(); // needed`
+`bad`: `event.preventDefault(); // prevent default`
+`good`: `event.preventDefault(); // block native form submit to keep SPA state and run async validation first`
+`good`: `event.stopPropagation(); // avoid duplicate parent click analytics event`
+
+## T007
+
+### Title
+
+Do not use optional chaining after a non-null guard
+
+### Why
+
+Use 2 coherent styles, not 3 mixed styles:
+- required value: no early return, fail fast if missing (`!` / `throw`)
+- optional value: use early return or `?.`
+
+The incoherent pattern is `if (!value) return` and then `value?.` in the same flow.
+After that guard, you already chose "if missing, exit", so the remaining code should treat the value as present.
+
+### Detect
+
+In the same local flow:
+- a value is checked with a guard such as `if (!value) return`
+- then the same value is used with optional chaining (`value?.method()`, `value?.prop`)
+
+### Severity
+
+`warning`
+
+### False Positive Guard
+
+Do not report when optional behavior is intentional (for example optional callbacks), or when there is no explicit local non-null guard.
+
+### Suggested Fix
+
+Choose one intent and keep it consistent:
+- required value: no early return; fail fast if missing (`!` / `throw`)
+- optional value: use early return or `?.`, but not both on the same value in the same flow
+
+### Examples
+
+`bad`: `if (!button) return; button?.addEventListener("click", onClick);`
+`bad`: `if (!panel) return; panel?.classList.add("is-open");`
+`good`: `button!.addEventListener("click", onClick);`
+`good`: `if (!panel) return; panel.classList.add("is-open");`
+`good`: `onClick?.(event); // callback is intentionally optional`
+
+## T008
+
+### Title
+
+Query selector result type must match the selected element
+
+### Why
+
+When a selector is typed/cast as the wrong element type, code can compile but fail at runtime or hide invalid assumptions.
+
+### Detect
+
+For `querySelector` / `querySelectorAll`, report when the declared or casted DOM type conflicts with the element implied by the selector/markup context.
+
+Examples of mismatches:
+- typed/casted as `HTMLButtonElement` but selector/markup points to an `<a>`
+- typed/casted as `HTMLAnchorElement` but selector/markup points to a `<button>`
+
+### Severity
+
+`warning`
+
+### False Positive Guard
+
+Do not report when selector targets are dynamic or not statically analyzable, when the element type is narrowed at runtime (`instanceof`, `matches`, `tagName` checks), or when markup source is outside repository control.
+
+### Suggested Fix
+
+Align selector, markup, and TypeScript type so they describe the same element. If element type is uncertain, use `HTMLElement` and narrow before type-specific APIs.
+
+### Examples
+
+`bad`: `const cta = root.querySelector(".cta") as HTMLButtonElement; // .cta is an <a>`
+`bad`: `const links: NodeListOf<HTMLAnchorElement> = root.querySelectorAll(".action-button"); // .action-button are <button>`
+`good`: `const cta = root.querySelector(".cta") as HTMLAnchorElement;`
+`good`: `const actions: NodeListOf<HTMLButtonElement> = root.querySelectorAll(".action-button");`
+
+## T009
 ### Title
 Avoid timing hacks for control flow
 
@@ -151,7 +269,7 @@ Prefer deterministic synchronization mechanisms such as `await`/Promises, lifecy
 `good`: `await this.updateComplete; this.focusInput()`
 `good`: `input.addEventListener('transitionend', onDone)`
 
-## T007
+## T010
 ### Title
 Handle errors explicitly; do not fail silently
 
