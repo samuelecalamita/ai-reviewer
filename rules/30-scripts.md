@@ -150,3 +150,30 @@ Prefer deterministic synchronization mechanisms such as `await`/Promises, lifecy
 `bad`: `setTimeout(() => this.items = nextItems, 0) // force render order`
 `good`: `await this.updateComplete; this.focusInput()`
 `good`: `input.addEventListener('transitionend', onDone)`
+
+## T007
+### Title
+Handle errors explicitly; do not fail silently
+
+### Why
+Ignoring errors makes bugs hard to find.
+
+### Detect
+Report when code catches/errors but does nothing useful (empty `catch`, silent fallback, ignored Promise error).
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report if the code clearly does at least one: recover, report, or rethrow.
+
+### Suggested Fix
+When an error happens, do one of these:
+- recover,
+- report/log properly,
+- rethrow.
+
+### Examples
+`bad`: `try { await save(); } catch (e) {}`
+`bad`: `fetchData().catch(() => null)`
+`good`: `try { await save(); } catch (e) { reportError(e); throw e; }`
