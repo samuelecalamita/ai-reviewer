@@ -125,3 +125,28 @@ Use specific interfaces/types, or `unknown` with explicit narrowing at usage bou
 `bad`: `return value as any`
 `good`: `const payload: ApiPayload = response.data`
 `good`: `const payload: unknown = response.data`
+
+## T006
+### Title
+Avoid timing hacks for control flow
+
+### Why
+Time-based sequencing is brittle and can break under variable rendering, network, and device conditions.
+
+### Detect
+Use of `setTimeout`, `setInterval`, or similar delay-based scheduling as a workaround to force event order, UI updates, focus, state synchronization, or async completion.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report intentional UX delays (for example toast auto-close), explicit debounce/throttle behavior, polling with documented stop conditions, or platform-driven timing requirements with a short inline justification.
+
+### Suggested Fix
+Prefer deterministic synchronization mechanisms such as `await`/Promises, lifecycle hooks, event callbacks, observers, request/cancel APIs, or explicit state transitions.
+
+### Examples
+`bad`: `setTimeout(() => this.focusInput(), 50)`
+`bad`: `setTimeout(() => this.items = nextItems, 0) // force render order`
+`good`: `await this.updateComplete; this.focusInput()`
+`good`: `input.addEventListener('transitionend', onDone)`
