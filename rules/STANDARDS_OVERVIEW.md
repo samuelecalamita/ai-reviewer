@@ -33,6 +33,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | K001 | error | Kluntje | Update Kluntje state only through `setState` |
 | K002 | error | Kluntje | Use Kluntje async rendering flow for async templates/data |
 | K003 | warning | Kluntje | Prefer decorators over constructor `ui/events/props` in new Kluntje components |
+| K004 | warning | Kluntje | Keep `@uiElement` / `@uiElements` typing consistent with single vs multiple bindings and selector intent |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |

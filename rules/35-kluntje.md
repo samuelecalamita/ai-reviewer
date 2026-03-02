@@ -73,3 +73,39 @@ Prefer `@uiElement` / `@uiElements` / `@uiEvent` / `@prop` for static UI, event,
 `bad`: `super({ ui: { button: ".cta :-one" }, events: [{ event: "click", target: "button", handler: "onClick" }] })`
 `good`: `@uiElement(".cta") button: HTMLButtonElement; @uiEvent("button", "click") onClick() {}`
 `good`: `constructor() { super({ initialStates: { open: false } }); } // keep constructor for non-decorator options`
+
+## K004
+### Title
+Keep `@uiElement` / `@uiElements` typing consistent with single vs multiple bindings and selector intent
+
+### Why
+Kluntje decorators bind different shapes:
+- `@uiElement(...)` binds one element
+- `@uiElements(...)` binds multiple elements (array-like result)
+
+Wrong typing hides runtime issues and weakens TypeScript safety for UI access.
+
+### Detect
+In Kluntje components:
+- `@uiElement(...)` fields typed as arrays/lists,
+- `@uiElements(...)` fields typed as a single element,
+- clearly incompatible element types for explicit tag selectors (for example `@uiElement("input")` typed as `HTMLButtonElement`).
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when the field is intentionally typed as `Element`/`HTMLElement` and then safely narrowed before element-specific API usage (for example with `instanceof`, `tagName`, or `matches` checks).
+
+### Suggested Fix
+Align decorator and field type:
+- `@uiElement` -> single element type (`HTMLInputElement`, `HTMLElement | null`, etc.)
+- `@uiElements` -> collection type (`Array<HTMLInputElement>`, `HTMLElement[]`, etc.)
+Also keep element type coherent with explicit selector intent.
+
+### Examples
+`bad`: `@uiElement(".item") items: HTMLDivElement[];`
+`bad`: `@uiElements(".item") item: HTMLDivElement;`
+`bad`: `@uiElement(".input") inputField: HTMLButtonElement;`
+`good`: `@uiElement(".input") inputField: HTMLInputElement;`
+`good`: `@uiElements(".item") items: HTMLDivElement[];`
