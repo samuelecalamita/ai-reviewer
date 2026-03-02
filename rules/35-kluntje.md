@@ -47,3 +47,29 @@ Move async rendering logic to `renderAsync()` and enable async flow using `@rend
 `bad`: `renderComponent() { this.renderAsync(); } // async flow not enabled`
 `good`: `@renderAsync class MyComp extends Component { async renderAsync() { ... } }`
 `good`: `constructor() { super({ asyncRendering: true }); } async renderAsync() { ... }`
+
+## K003
+### Title
+Prefer decorators over constructor `ui/events/props` in new Kluntje components
+
+### Why
+Decorator-based bindings (`@uiElement`, `@uiElements`, `@uiEvent`, `@prop`) are the modern Kluntje style and keep selectors, handlers, and prop definitions close to class members. This usually gives clearer, safer typing because element and handler types are declared directly on typed fields/methods.
+
+### Detect
+In new Kluntje components (or substantial rewrites), constructor definitions that use `super({ ui: ..., events: ..., props: ... })` for static bindings that can be expressed with decorators.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when:
+- component code is legacy and not being substantially refactored,
+- constructor options are used for features not covered by decorators (for example `initialStates`, `reactions`, `useShadowDOM`, `preserveChildren`, `asyncRendering`).
+
+### Suggested Fix
+Prefer `@uiElement` / `@uiElements` / `@uiEvent` / `@prop` for static UI, event, and prop bindings. Keep constructor options only where decorators are not applicable.
+
+### Examples
+`bad`: `super({ ui: { button: ".cta :-one" }, events: [{ event: "click", target: "button", handler: "onClick" }] })`
+`good`: `@uiElement(".cta") button: HTMLButtonElement; @uiEvent("button", "click") onClick() {}`
+`good`: `constructor() { super({ initialStates: { open: false } }); } // keep constructor for non-decorator options`

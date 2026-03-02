@@ -32,6 +32,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | T011 | warning | Scripts | Call `super` when overriding inherited lifecycle methods |
 | K001 | error | Kluntje | Update Kluntje state only through `setState` |
 | K002 | error | Kluntje | Use Kluntje async rendering flow for async templates/data |
+| K003 | warning | Kluntje | Prefer decorators over constructor `ui/events/props` in new Kluntje components |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |
