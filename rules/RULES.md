@@ -14,14 +14,16 @@ Define a model-agnostic and maintainable standards system for frontend code revi
 2. `rules/10-markup.md`
 3. `rules/20-styles.md`
 4. `rules/30-scripts.md`
-5. `rules/40-dependencies.md`
-6. `rules/50-testing.md`
+5. `rules/35-kluntje.md`
+6. `rules/40-dependencies.md`
+7. `rules/50-testing.md`
 
 ## ID Conventions
 - `Gxxx`: global
 - `Mxxx`: markup/accessibility
 - `Sxxx`: styles/SCSS
 - `Txxx`: scripts/TypeScript
+- `Kxxx`: kluntje library usage
 - `Dxxx`: dependencies
 - `Qxxx`: testing/quality
 

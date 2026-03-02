@@ -29,6 +29,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | T008 | warning | Scripts | Query selector result type must match the selected element |
 | T009 | warning | Scripts | Avoid timing hacks for control flow |
 | T010 | warning | Scripts | Handle errors explicitly; do not fail silently |
+| K001 | error | Kluntje | Update Kluntje state only through `setState` |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |
@@ -40,5 +41,6 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 - `rules/10-markup.md`
 - `rules/20-styles.md`
 - `rules/30-scripts.md`
+- `rules/35-kluntje.md`
 - `rules/40-dependencies.md`
 - `rules/50-testing.md`
