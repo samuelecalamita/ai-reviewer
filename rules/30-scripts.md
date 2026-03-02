@@ -295,3 +295,29 @@ When an error happens, do one of these:
 `bad`: `try { await save(); } catch (e) {}`
 `bad`: `fetchData().catch(() => null)`
 `good`: `try { await save(); } catch (e) { reportError(e); throw e; }`
+
+## T011
+### Title
+Call `super` when overriding inherited lifecycle methods
+
+### Why
+When a subclass overrides lifecycle methods, skipping `super` can silently bypass setup/cleanup implemented in the parent class.
+
+### Detect
+In classes using `extends`, overridden lifecycle methods (`connectedCallback`, `disconnectedCallback`, `adoptedCallback`, `attributeChangedCallback`) that do not call `super.<method>()`.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when:
+- the parent class clearly has no lifecycle implementation,
+- or skipping `super` is intentional and documented with a short inline comment explaining why.
+
+### Suggested Fix
+Call `super.<method>()` in the override (typically at the beginning for setup, or at the end for cleanup based on the parent contract).
+
+### Examples
+`bad`: `connectedCallback() { this.init(); }`
+`good`: `connectedCallback() { super.connectedCallback(); this.init(); }`
+`good`: `disconnectedCallback() { this.teardown(); super.disconnectedCallback(); }`

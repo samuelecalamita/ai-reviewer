@@ -29,6 +29,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | T008 | warning | Scripts | Query selector result type must match the selected element |
 | T009 | warning | Scripts | Avoid timing hacks for control flow |
 | T010 | warning | Scripts | Handle errors explicitly; do not fail silently |
+| T011 | warning | Scripts | Call `super` when overriding inherited lifecycle methods |
 | K001 | error | Kluntje | Update Kluntje state only through `setState` |
 | K002 | error | Kluntje | Use Kluntje async rendering flow for async templates/data |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
