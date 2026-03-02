@@ -30,6 +30,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | T009 | warning | Scripts | Avoid timing hacks for control flow |
 | T010 | warning | Scripts | Handle errors explicitly; do not fail silently |
 | K001 | error | Kluntje | Update Kluntje state only through `setState` |
+| K002 | error | Kluntje | Use Kluntje async rendering flow for async templates/data |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |
