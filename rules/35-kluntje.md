@@ -109,3 +109,62 @@ Also keep element type coherent with explicit selector intent.
 `bad`: `@uiElement(".input") inputField: HTMLButtonElement;`
 `good`: `@uiElement(".input") inputField: HTMLInputElement;`
 `good`: `@uiElements(".item") items: HTMLDivElement[];`
+
+## K005
+### Title
+Avoid unused local Kluntje UI bindings (decorators and constructor `ui` object)
+
+### Why
+Unused local UI bindings are often stale selectors left after refactors. They add noise, hide markup drift, and make component intent harder to read.
+
+### Detect
+In Kluntje components, report UI bindings not used in the same class:
+- `@uiElement` / `@uiElements` fields not read/written and not referenced by `@uiEvent("<fieldName>", ...)`,
+- `super({ ui: { ... } })` keys not used as `this.ui.<key>` and not referenced by constructor events `target: "<key>"`.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when access is dynamic or not statically analyzable (for example `this[key]`, mixins/base classes, framework-external integrations).
+
+### Suggested Fix
+Remove unused bindings, or wire them to real behavior in the same class.
+If the binding is intentionally exposed to subclasses/wrappers, follow the extension conventions:
+- decorator fields as `protected`,
+- constructor `ui` keys prefixed with something like `_exposed...`.
+
+### Examples
+`bad`: `@uiElement(".cta") cta: HTMLButtonElement; // never used`
+`bad`: `@uiElements(".card") cards: HTMLElement[]; // never used`
+`bad`: `super({ ui: { cta: ".cta :-one" } }); // cta never used`
+`good`: `@uiElement(".cta") cta: HTMLButtonElement; @uiEvent("cta", "click") onClick() {}`
+`good`: `@uiElements(".card") cards: HTMLElement[]; highlight() { this.cards.forEach(...) }`
+`good`: `super({ ui: { _exposedCta: ".cta :-one" } }); // intentionally exposed key`
+
+## K006
+### Title
+Prefer declaring UI selectors in subclass/wrapper when usage is local
+
+### Why
+When a selector is used only by a specific subclass/wrapper, declaring it there reduces coupling with the base component and makes ownership clearer.
+
+### Detect
+Base components declaring decorator/UI-object selectors that are not used in base-class behavior and are consumed only by subclasses/wrappers.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when the selector is part of a shared extension contract used by multiple subclasses, or when centralizing the selector in base avoids harmful duplication and is clearly intentional.
+
+### Suggested Fix
+Move selector declarations to the subclass/wrapper that uses them.
+Keep selectors in base only for shared extension points, and mark them explicitly:
+- `protected` for decorator fields,
+- `_exposed...` for constructor `ui` keys.
+
+### Examples
+`bad`: `BaseCard` defines `@uiElement(".badge") badge`, used only in `PromoCard`
+`good`: `PromoCard` declares its own `@uiElement(".badge") badge`
+`good`: `BaseCard` keeps `protected @uiElement(".badge") badge` because multiple subclasses rely on it
