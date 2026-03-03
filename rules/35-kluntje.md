@@ -224,3 +224,30 @@ Prefer Kluntje APIs for UI bindings, events, props, and state. Keep manual DOM/e
 `good`: `@uiElement(".cta") cta: HTMLButtonElement; @uiEvent("cta", "click") onClick() {}`
 `bad`: `this.localCount = this.localCount + 1`
 `good`: `this.setState({ count: this.state.count + 1 })`
+
+## K009
+### Title
+Prefer `@kluntje/js-utils` helpers over local utility re-implementations
+
+### Why
+`@kluntje/js-utils` provides shared, tested helpers aligned with Kluntje projects. Re-implementing common utilities in components increases duplication and inconsistency.
+
+### Detect
+In Kluntje component code (or nearby component utility modules):
+- new local helper functions that duplicate common `@kluntje/js-utils` behavior (for example `debounce`, `throttle`, `waitFor`, `waitForEvent`, class toggling helpers),
+- new utility dependencies added for behavior already available in `@kluntje/js-utils`.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when project-specific behavior intentionally differs from `@kluntje/js-utils`, or when there is a documented technical reason to avoid the shared helper.
+
+### Suggested Fix
+Use `@kluntje/js-utils` helpers via focused imports (for example `@kluntje/js-utils/lib/function-helpers`, `@kluntje/js-utils/lib/dom-helpers`) instead of duplicating utility code.
+
+### Examples
+`bad`: `const debounce = (fn, ms) => { ... }; // local re-implementation`
+`good`: `import { debounce } from "@kluntje/js-utils/lib/function-helpers";`
+`bad`: `npm add tiny-debounce // while debounce helper already exists in @kluntje/js-utils`
+`good`: `import { waitForEvent } from "@kluntje/js-utils/lib/dom-helpers";`
