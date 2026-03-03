@@ -36,6 +36,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | K004 | warning | Kluntje | Keep `@uiElement` / `@uiElements` typing consistent with single vs multiple bindings and selector intent |
 | K005 | warning | Kluntje | Avoid unused local Kluntje UI bindings (decorators and constructor `ui` object) |
 | K006 | warning | Kluntje | Prefer declaring UI selectors in subclass/wrapper when usage is local |
+| K007 | warning | Kluntje | Prefer async template imports for CSR-heavy Kluntje components |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |

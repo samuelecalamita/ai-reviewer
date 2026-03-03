@@ -168,3 +168,29 @@ Keep selectors in base only for shared extension points, and mark them explicitl
 `bad`: `BaseCard` defines `@uiElement(".badge") badge`, used only in `PromoCard`
 `good`: `PromoCard` declares its own `@uiElement(".badge") badge`
 `good`: `BaseCard` keeps `protected @uiElement(".badge") badge` because multiple subclasses rely on it
+
+## K007
+### Title
+Prefer async template imports for CSR Kluntje components
+
+### Why
+For client-side-rendered components, static template imports can increase initial bundle size. Lazy-loading templates with dynamic `import()` can reduce startup cost and improve first-load performance.
+
+### Detect
+Kluntje components that render only on the client and statically import large/feature-specific templates that could be loaded on demand in `renderAsync()`.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when:
+- the component is primarily SSR-rendered and CSR template loading is not needed,
+- the template is intentionally eager for critical above-the-fold rendering,
+
+### Suggested Fix
+Use dynamic template imports in `renderAsync()` (with `@renderAsync` or `asyncRendering: true`) when template size/scope justifies lazy loading.
+
+### Examples
+`bad`: `import { productTemplate } from "./product.template"; // large CSR-only template eagerly loaded`
+`good`: `const { productTemplate } = await import("./product.template");`
+`good`: `@renderAsync class ProductCard extends Component { async renderAsync() { const { productTemplate } = await import("./product.template"); ... } }`
