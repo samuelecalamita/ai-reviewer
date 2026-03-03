@@ -21,7 +21,7 @@ Use when reviewing existing changes (for example pre-commit or PR checks).
 
 #### Quick Triggers
 - `AGENTS review: full codebase` => review all source files in the repository.
-- `AGENTS review: git diff` => review only staged + unstaged git diff files.
+- `AGENTS review: git diff` => review only staged + unstaged git diff files. (local changes)
 
 #### Inputs
 - Diff or changed files.
