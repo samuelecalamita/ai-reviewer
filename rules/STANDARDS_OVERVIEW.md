@@ -39,6 +39,7 @@ Quick maintainer reference of rules defined in `rules/RULES.md` and linked rule 
 | K007 | warning | Kluntje | Prefer async template imports for CSR-heavy Kluntje components |
 | K008 | warning | Kluntje | Prefer Kluntje component APIs over raw DOM/event wiring inside Kluntje components |
 | K009 | warning | Kluntje | Prefer `@kluntje/js-utils` helpers over local utility re-implementations |
+| K010 | warning | Kluntje | Prefer `@kluntje/services` for common browser services |
 | D001 | warning | Dependencies | Avoid unnecessary new dependencies |
 | D002 | warning | Dependencies | Use dependencies according to project standards |
 | Q001 | error | Testing | Critical business logic must be covered by tests |

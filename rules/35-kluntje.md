@@ -251,3 +251,40 @@ Use `@kluntje/js-utils` helpers via focused imports (for example `@kluntje/js-ut
 `good`: `import { debounce } from "@kluntje/js-utils/lib/function-helpers";`
 `bad`: `npm add tiny-debounce // while debounce helper already exists in @kluntje/js-utils`
 `good`: `import { waitForEvent } from "@kluntje/js-utils/lib/dom-helpers";`
+
+## K010
+### Title
+Prefer `@kluntje/services` for common browser services
+
+### Why
+`@kluntje/services` provides shared implementations for recurring concerns (for example URL query params, caching/storage, viewport/media-query observation, i18n). Re-implementing these services locally increases duplication and inconsistent behavior.
+
+### Common Services (Non-Exhaustive)
+- URL/query params: `URLSearchParamsService`
+- Storage/caching: `StorageService`, `CachingService`, `RequestCachingService`
+- Viewport/media-query/lazy connect: `ViewportObserver`, `MediaQueryService`, `LazyConnectService`
+- i18n: `I18nService`
+- API/requests/observers/context: `APIService`, `AbortableRequestService`, `ObserverService`, `ContextStateService`
+- Debugging: `DebuggerService`
+
+Reference: `https://github.com/kluntje/kluntje/tree/master/packages/services` (README/index are the source of truth).
+
+### Detect
+In Kluntje component code (or nearby component support modules):
+- new local singleton/services that duplicate capabilities already provided by `@kluntje/services`,
+- new dependencies added for browser/service concerns already covered by `@kluntje/services`.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when project requirements are intentionally different from the provided Kluntje service behavior, or when there is a documented technical reason to use a custom/local service.
+
+### Suggested Fix
+Use `@kluntje/services` where applicable (for example `URLSearchParamsService`, `CachingService`, `StorageService`, `ViewportObserver`, `MediaQueryService`, `I18nService`) instead of creating parallel local service implementations.
+
+### Examples
+`bad`: `class LocalQueryParamsService { ... } // duplicates URLSearchParams handling`
+`good`: `import { URLSearchParamsService } from "@kluntje/services";`
+`bad`: `class LocalViewportObserver { ... } // duplicates viewport observer service`
+`good`: `import { ViewportObserver } from "@kluntje/services";`
