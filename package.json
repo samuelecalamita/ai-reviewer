@@ -27,6 +27,9 @@
   },
   "homepage": "https://github.com/samuelecalamita/ai-reviewer#readme",
   "dependencies": {
+    "@kluntje/core": "^2.1.7",
+    "@kluntje/js-utils": "^0.8.1",
+    "@kluntje/services": "^0.10.2",
     "lit": "^3.3.2"
   },
   "devDependencies": {
