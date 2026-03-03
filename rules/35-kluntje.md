@@ -194,3 +194,33 @@ Use dynamic template imports in `renderAsync()` (with `@renderAsync` or `asyncRe
 `bad`: `import { productTemplate } from "./product.template"; // large CSR-only template eagerly loaded`
 `good`: `const { productTemplate } = await import("./product.template");`
 `good`: `@renderAsync class ProductCard extends Component { async renderAsync() { const { productTemplate } = await import("./product.template"); ... } }`
+
+## K008
+### Title
+Prefer Kluntje component APIs over raw DOM/event wiring inside Kluntje components
+
+### Why
+In Kluntje components, using framework APIs (`@uiEvent`, `@uiElement` / `@uiElements`, `@prop`, `setState`, `reactions`) keeps lifecycle, cleanup, and typing more consistent than manual DOM/event wiring.
+
+### Detect
+In classes extending Kluntje `Component`, new/changed code paths that:
+- perform manual DOM query/event wiring where equivalent Kluntje APIs are available,
+- or manage component state/props manually where `setState` / `@prop` / `reactions` are a better fit.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report when:
+- Kluntje APIs do not fit the use case,
+- manual wiring is required by third-party integrations or performance constraints,
+- an explicit technical rationale is documented.
+
+### Suggested Fix
+Prefer Kluntje APIs for UI bindings, events, props, and state. Keep manual DOM/event/state handling only for justified exceptional cases.
+
+### Examples
+`bad`: `this.querySelector(".cta")?.addEventListener("click", this.onClick)`
+`good`: `@uiElement(".cta") cta: HTMLButtonElement; @uiEvent("cta", "click") onClick() {}`
+`bad`: `this.localCount = this.localCount + 1`
+`good`: `this.setState({ count: this.state.count + 1 })`
