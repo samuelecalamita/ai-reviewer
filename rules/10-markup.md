@@ -167,7 +167,7 @@ Icon-only or image-only interactive elements without an accessible name are not 
 
 ### Detect
 
-Interactive elements (for example `<a>`, `<button>`, or custom elements with interactive role) whose visible content is only an image/icon and that do not expose an accessible name (for example via visible text, screen-reader-only text, `aria-label`, `aria-labelledby`, or meaningful image `alt` text).
+Interactive elements (for example `<a>`, `<button>`, or custom elements with interactive role) whose visible content is only an image/icon and that do not expose an accessible name (for example via visible text, screen-reader-only text, `aria-label`, `aria-labelledby`, or meaningful image `alt` text). Decorative inner images/icons with `alt=""` or `aria-hidden="true"` are valid only when the interactive element has another accessible name source.
 
 ### Severity
 
@@ -175,11 +175,11 @@ Interactive elements (for example `<a>`, `<button>`, or custom elements with int
 
 ### False Positive Guard
 
-Do not report when the interactive element already has a valid accessible name through visible text, screen-reader-only text (for example `sr-only`/`visually-hidden`), `aria-label`, `aria-labelledby`, or non-empty meaningful `alt` on an informative image.
+Do not report when the interactive element already has a valid accessible name through visible text, screen-reader-only text (for example `sr-only`/`visually-hidden`), `aria-label`, `aria-labelledby`, or non-empty meaningful `alt` on an informative image. Also do not report decorative images/icons marked with `alt=""` or `aria-hidden="true"` if the interactive element is already named.
 
 ### Suggested Fix
 
-Provide a clear accessible name on the interactive element with visible text, screen-reader-only text, or `aria-label`/`aria-labelledby`; if relying on the image, ensure the image has meaningful non-empty `alt` text.
+Provide a clear accessible name on the interactive element with visible text, screen-reader-only text, or `aria-label`/`aria-labelledby`; if relying on the image, ensure the image has meaningful non-empty `alt` text. For decorative inner images/icons, prefer `alt=""` and/or `aria-hidden="true"` and keep the accessible name on the interactive element.
 
 ### Examples
 
@@ -187,5 +187,6 @@ Provide a clear accessible name on the interactive element with visible text, sc
 `good`: `<a href="/home" aria-label="Home"><img src="/icons/home.svg" alt="" /></a>`
 `good`: `<a href="/home"><img src="/icons/home.svg" alt="Home" /></a>`
 `good`: `<a href="/home"><img src="/icons/home.svg" alt="" /><span class="sr-only">Home</span></a>`
+`good`: `<a href="/home" aria-label="Home"><img src="/icons/home.svg" alt="" /></a>`
 `bad`: `<button type="button"><img src="/icons/search.svg" alt="" /></button>`
 `good`: `<button type="button" aria-label="Search"><img src="/icons/search.svg" alt="" /></button>`

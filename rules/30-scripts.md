@@ -267,3 +267,55 @@ Align selector, markup, and TypeScript type so they describe the same element. I
 `bad`: `const links: NodeListOf<HTMLAnchorElement> = root.querySelectorAll(".action-button"); // .action-button are <button>`
 `good`: `const cta = root.querySelector(".cta") as HTMLAnchorElement;`
 `good`: `const actions: NodeListOf<HTMLButtonElement> = root.querySelectorAll(".action-button");`
+
+## T009
+### Title
+Avoid timing hacks for control flow
+
+### Why
+Time-based sequencing is brittle and can break under variable rendering, network, and device conditions.
+
+### Detect
+Use of `setTimeout`, `setInterval`, or similar delay-based scheduling as a workaround to force event order, UI updates, focus, state synchronization, or async completion.
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report intentional UX delays (for example toast auto-close), explicit debounce/throttle behavior, polling with documented stop conditions, or platform-driven timing requirements with a short inline justification.
+
+### Suggested Fix
+Prefer deterministic synchronization mechanisms such as `await`/Promises, lifecycle hooks, event callbacks, observers, request/cancel APIs, or explicit state transitions.
+
+### Examples
+`bad`: `setTimeout(() => this.focusInput(), 50)`
+`bad`: `setTimeout(() => this.items = nextItems, 0) // force render order`
+`good`: `await this.updateComplete; this.focusInput()`
+`good`: `input.addEventListener('transitionend', onDone)`
+
+## T010
+### Title
+Handle errors explicitly; do not fail silently
+
+### Why
+Ignoring errors makes bugs hard to find.
+
+### Detect
+Report when code catches/errors but does nothing useful (empty `catch`, silent fallback, ignored Promise error).
+
+### Severity
+`warning`
+
+### False Positive Guard
+Do not report if the code clearly does at least one: recover, report, or rethrow.
+
+### Suggested Fix
+When an error happens, do one of these:
+- recover,
+- report/log properly,
+- rethrow.
+
+### Examples
+`bad`: `try { await save(); } catch (e) {}`
+`bad`: `fetchData().catch(() => null)`
+`good`: `try { await save(); } catch (e) { reportError(e); throw e; }`
